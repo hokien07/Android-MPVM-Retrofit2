@@ -21,16 +21,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hokien07.developer.xemhai.R;
+import hokien07.developer.xemhai.adapters.PlaylistAdapter;
 import hokien07.developer.xemhai.adapters.VideoAdapter;
+import hokien07.developer.xemhai.models.Playlist;
 import hokien07.developer.xemhai.models.Snippet;
 import hokien07.developer.xemhai.models.VideoModel;
+import hokien07.developer.xemhai.presenters.PlaylistPresenter;
+import hokien07.developer.xemhai.presenters.PlaylistPresenterImp;
 import hokien07.developer.xemhai.presenters.VideoListPresenter;
 import hokien07.developer.xemhai.presenters.VideoListPresenterImp;
 import hokien07.developer.xemhai.views.activitys.VideoDetailActivity;
 
-public class MusicFragment extends Fragment {
+public class MusicFragment extends Fragment implements PlaylistPresenterImp.View {
 
     private static final String TAG = MusicFragment.class.getSimpleName();
+
+    private PlaylistPresenter playlistPresenter;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private PlaylistAdapter adapter;
 
     private MusicFragment() {
 
@@ -52,6 +61,7 @@ public class MusicFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Initializing presenter
+        playlistPresenter = new PlaylistPresenter(this);
 
     }
 
@@ -68,11 +78,39 @@ public class MusicFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        playlistPresenter.requestDataFromServer();
     }
 
 
     private void initView(View view) {
+        adapter = new PlaylistAdapter(getContext());
+        recyclerView = view.findViewById(R.id.recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        progressBar = view.findViewById(R.id.progress);
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setDataToRecyclerView(List<Playlist> playLists) {
+        adapter.submitList(playLists);
+    }
+
+    @Override
+    public void onResponsiveFailure(String error) {
 
     }
 }

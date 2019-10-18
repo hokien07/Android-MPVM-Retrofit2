@@ -15,7 +15,7 @@ public class Playlist {
     private String id;
     @SerializedName("snippet")
     @Expose
-    private Snippet snippet;
+    private PlaylistSnippet snippet;
 
     public String getKind() {
         return kind;
@@ -41,11 +41,11 @@ public class Playlist {
         this.id = id;
     }
 
-    public Snippet getSnippet() {
+    public PlaylistSnippet getSnippet() {
         return snippet;
     }
 
-    public void setSnippet(Snippet snippet) {
+    public void setSnippet(PlaylistSnippet snippet) {
         this.snippet = snippet;
     }
 }

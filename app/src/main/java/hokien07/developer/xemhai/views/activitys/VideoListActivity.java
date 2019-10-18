@@ -2,18 +2,12 @@ package hokien07.developer.xemhai.views.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +19,6 @@ import hokien07.developer.xemhai.models.Snippet;
 import hokien07.developer.xemhai.models.VideoModel;
 import hokien07.developer.xemhai.presenters.VideoListPresenter;
 import hokien07.developer.xemhai.presenters.VideoListPresenterImp;
-import hokien07.developer.xemhai.views.fragments.MusicFragment;
 
 public class VideoListActivity extends BaseActivity implements VideoListPresenterImp.View {
     private static final String TAG = VideoListActivity.class.getSimpleName();
