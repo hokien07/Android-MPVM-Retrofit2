@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Xem Hài</string>
+
+    <string name="last_video">Video mới nhất</string>
+    <string name="music">Nhạc</string>
+    <string name="martial_arts">Võ thuật</string>
+    <string name="tv">Truyền hình</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
