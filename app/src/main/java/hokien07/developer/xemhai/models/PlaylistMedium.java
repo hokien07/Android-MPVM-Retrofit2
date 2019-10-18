@@ -3,7 +3,7 @@ package hokien07.developer.xemhai.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChannelMedium {
+public class PlaylistMedium {
     @SerializedName("url")
     @Expose
     private String url;

@@ -3,7 +3,7 @@ package hokien07.developer.xemhai.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChannelLocalized {
+public class PlaylistLocalized {
     @SerializedName("title")
     @Expose
     private String title;

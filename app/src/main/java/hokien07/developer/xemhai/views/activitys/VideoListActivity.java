@@ -1,22 +1,41 @@
 package hokien07.developer.xemhai.views.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hokien07.developer.xemhai.BaseActivity;
 import hokien07.developer.xemhai.R;
+import hokien07.developer.xemhai.adapters.VideoAdapter;
+import hokien07.developer.xemhai.models.Snippet;
+import hokien07.developer.xemhai.models.VideoModel;
+import hokien07.developer.xemhai.presenters.VideoListPresenter;
+import hokien07.developer.xemhai.presenters.VideoListPresenterImp;
 import hokien07.developer.xemhai.views.fragments.MusicFragment;
 
-public class VideoListActivity extends BaseActivity implements  BottomNavigationView.OnNavigationItemSelectedListener {
+public class VideoListActivity extends BaseActivity implements VideoListPresenterImp.View {
     private static final String TAG = VideoListActivity.class.getSimpleName();
 
     private Toolbar toolbar;
+    private VideoListPresenter videoListPresenter;
+    private RecyclerView recyclerView;
+    private List<VideoModel> videos;
+    private VideoAdapter adapter;
+    private ProgressBar pbLoading;
 
 
     @Override
@@ -24,12 +43,13 @@ public class VideoListActivity extends BaseActivity implements  BottomNavigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        videoListPresenter = new VideoListPresenter(this);
+        videoListPresenter.requestDataFromServer();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        loadFragment(MusicFragment.getInstance());
     }
 
     private void initView() {
@@ -37,37 +57,52 @@ public class VideoListActivity extends BaseActivity implements  BottomNavigation
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Video Tổng hợp");
 
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
-        navigationView.setOnNavigationItemSelectedListener(this);
+        recyclerView = findViewById(R.id.video_list);
+        videos = new ArrayList<>();
+        adapter = new VideoAdapter(this);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+
+        pbLoading = findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.GONE);
+
+
+        adapter.setOnItemClickListener(new VideoAdapter.OnitemClickListenner() {
+            @Override
+            public void onVideoClick(VideoModel videoModel) {
+                Snippet snippet = videoModel.getSnippet();
+                Intent intent = new Intent(VideoListActivity.this, VideoDetailActivity.class);
+                intent.putExtra("VIDEO_ID", snippet.getResourceId().getVideoId());
+                intent.putExtra("TITLE_VIDEO", snippet.getTitle());
+                startActivity(intent);
+            }
+        });
     }
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+
+
+    @Override
+    public void showProgress() {
+        pbLoading.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment;
-        switch (menuItem.getItemId()) {
-            case R.id.navigation_music:
-                toolbar.setTitle("Top Nhạc nghe nhiều nhất");
-                fragment = MusicFragment.getInstance();
-                loadFragment(fragment);
-                return true;
-            case R.id.navigation_arts:
-                toolbar.setTitle("Top Video võ thuật xem nhiều nhất");
-                fragment = MusicFragment.getInstance();
-                loadFragment(fragment);
-                return true;
-            case R.id.navigation_tv:
-                toolbar.setTitle("Top chương trình xem nhiều nhất");
-                fragment = MusicFragment.getInstance();
-                loadFragment(fragment);
-                return true;
-        }
-        return false;
+    public void hideProgress() {
+        pbLoading.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setDataToRecyclerView(List<VideoModel> videoModels) {
+        adapter.submitList(videoModels);
+    }
+
+    @Override
+    public void onResponseFailure(String error) {
+
     }
 }

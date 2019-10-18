@@ -3,49 +3,49 @@ package hokien07.developer.xemhai.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChannelThumbnails {
+public class PlaylistThumbnails {
     @SerializedName("default")
     @Expose
-    private ChannelDefault _default;
+    private PlaylistDefault _default;
     @SerializedName("medium")
     @Expose
-    private ChannelMedium medium;
+    private PlaylistMedium medium;
     @SerializedName("high")
     @Expose
-    private ChannelHigh high;
+    private PlaylistHigh high;
     @SerializedName("standard")
     @Expose
-    private ChannelStandard standard;
+    private PlaylistStandard standard;
 
-    public ChannelDefault getDefault() {
+    public PlaylistDefault getDefault() {
         return _default;
     }
 
-    public void setDefault(ChannelDefault _default) {
+    public void setDefault(PlaylistDefault _default) {
         this._default = _default;
     }
 
-    public ChannelMedium getMedium() {
+    public PlaylistMedium getMedium() {
         return medium;
     }
 
-    public void setMedium(ChannelMedium medium) {
+    public void setMedium(PlaylistMedium medium) {
         this.medium = medium;
     }
 
-    public ChannelHigh getHigh() {
+    public PlaylistHigh getHigh() {
         return high;
     }
 
-    public void setHigh(ChannelHigh high) {
+    public void setHigh(PlaylistHigh high) {
         this.high = high;
     }
 
-    public ChannelStandard getStandard() {
+    public PlaylistStandard getStandard() {
         return standard;
     }
 
-    public void setStandard(ChannelStandard standard) {
+    public void setStandard(PlaylistStandard standard) {
         this.standard = standard;
     }
 }

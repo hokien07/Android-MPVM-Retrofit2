@@ -3,7 +3,7 @@ package hokien07.developer.xemhai.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChannelPageInfo {
+public class PlaylistPageInfo {
     @SerializedName("totalResults")
     @Expose
     private Integer totalResults;

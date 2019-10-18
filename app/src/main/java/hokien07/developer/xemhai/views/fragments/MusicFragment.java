@@ -28,15 +28,9 @@ import hokien07.developer.xemhai.presenters.VideoListPresenter;
 import hokien07.developer.xemhai.presenters.VideoListPresenterImp;
 import hokien07.developer.xemhai.views.activitys.VideoDetailActivity;
 
-public class MusicFragment extends Fragment implements VideoListPresenterImp.View {
+public class MusicFragment extends Fragment {
 
     private static final String TAG = MusicFragment.class.getSimpleName();
-
-    private VideoListPresenter videoListPresenter;
-    private RecyclerView recyclerView;
-    private List<VideoModel> videos;
-    private VideoAdapter adapter;
-    private ProgressBar pbLoading;
 
     private MusicFragment() {
 
@@ -58,7 +52,7 @@ public class MusicFragment extends Fragment implements VideoListPresenterImp.Vie
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Initializing presenter
-        videoListPresenter = new VideoListPresenter(this);
+
     }
 
 
@@ -74,56 +68,11 @@ public class MusicFragment extends Fragment implements VideoListPresenterImp.Vie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        videoListPresenter.requestDataFromServer();
-    }
 
+    }
 
 
     private void initView(View view) {
-        recyclerView = view.findViewById(R.id.video_list);
-        videos = new ArrayList<>();
-        adapter = new VideoAdapter(getContext());
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-
-        pbLoading = view.findViewById(R.id.pbLoading);
-        pbLoading.setVisibility(View.GONE);
-
-
-        adapter.setOnItemClickListener(new VideoAdapter.OnitemClickListenner() {
-            @Override
-            public void onVideoClick(VideoModel videoModel) {
-                Snippet snippet = videoModel.getSnippet();
-                Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                intent.putExtra("VIDEO_ID", snippet.getResourceId().getVideoId());
-                intent.putExtra("TITLE_VIDEO", snippet.getTitle());
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    public void showProgress() {
-        pbLoading.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void hideProgress() {
-        pbLoading.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void setDataToRecyclerView(List<VideoModel> videoModels) {
-        adapter.submitList(videoModels);
-    }
-
-    @Override
-    public void onResponseFailure(String error) {
-        Log.e(TAG, "onResponseFailure: " + error );
     }
 }

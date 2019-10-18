@@ -3,19 +3,21 @@ package hokien07.developer.xemhai.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Channel {
+import java.util.List;
+
+public class PlaylistResponsiveAPI {
     @SerializedName("kind")
     @Expose
     private String kind;
     @SerializedName("etag")
     @Expose
     private String etag;
-    @SerializedName("id")
+    @SerializedName("pageInfo")
     @Expose
-    private String id;
-    @SerializedName("snippet")
+    private PlaylistPageInfo pageInfo;
+    @SerializedName("items")
     @Expose
-    private Snippet snippet;
+    private List<Playlist> playlists = null;
 
     public String getKind() {
         return kind;
@@ -33,19 +35,19 @@ public class Channel {
         this.etag = etag;
     }
 
-    public String getId() {
-        return id;
+    public PlaylistPageInfo getPageInfo() {
+        return pageInfo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPageInfo(PlaylistPageInfo pageInfo) {
+        this.pageInfo = pageInfo;
     }
 
-    public Snippet getSnippet() {
-        return snippet;
+    public List<Playlist> getPlaylists() {
+        return playlists;
     }
 
-    public void setSnippet(Snippet snippet) {
-        this.snippet = snippet;
+    public void setItems(List<Playlist> playlists) {
+        this.playlists = playlists;
     }
 }

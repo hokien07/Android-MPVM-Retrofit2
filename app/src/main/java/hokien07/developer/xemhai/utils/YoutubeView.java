@@ -30,4 +30,8 @@ public class YoutubeView {
     public String getBrowserKey() {
         return BrowserKey;
     }
+
+    public String getChannelId() {
+        return ChannelId;
+    }
 }

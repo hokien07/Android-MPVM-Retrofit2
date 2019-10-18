@@ -13,16 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".views.activitys.PlayListActivity"></activity>
-        <activity android:name=".views.activitys.VideoDetailActivity" />
-        <activity android:name=".BaseActivity" />
-        <activity android:name=".views.activitys.VideoListActivity">
+        <activity android:name=".views.activitys.PlayListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".views.activitys.VideoDetailActivity" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".views.activitys.VideoListActivity"/>
     </application>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />

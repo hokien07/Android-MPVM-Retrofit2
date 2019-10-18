@@ -3,7 +3,7 @@ package hokien07.developer.xemhai.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ChannelSnippet {
+public class PlaylistSnippet {
     @SerializedName("publishedAt")
     @Expose
     private String publishedAt;
@@ -18,13 +18,13 @@ public class ChannelSnippet {
     private String description;
     @SerializedName("thumbnails")
     @Expose
-    private ChannelThumbnails thumbnails;
+    private PlaylistThumbnails thumbnails;
     @SerializedName("channelTitle")
     @Expose
     private String channelTitle;
     @SerializedName("localized")
     @Expose
-    private ChannelLocalized localized;
+    private PlaylistLocalized localized;
 
     public String getPublishedAt() {
         return publishedAt;
@@ -58,11 +58,11 @@ public class ChannelSnippet {
         this.description = description;
     }
 
-    public ChannelThumbnails getThumbnails() {
+    public PlaylistThumbnails getThumbnails() {
         return thumbnails;
     }
 
-    public void setThumbnails(ChannelThumbnails thumbnails) {
+    public void setThumbnails(PlaylistThumbnails thumbnails) {
         this.thumbnails = thumbnails;
     }
 
@@ -74,11 +74,11 @@ public class ChannelSnippet {
         this.channelTitle = channelTitle;
     }
 
-    public ChannelLocalized getLocalized() {
+    public PlaylistLocalized getLocalized() {
         return localized;
     }
 
-    public void setLocalized(ChannelLocalized localized) {
+    public void setLocalized(PlaylistLocalized localized) {
         this.localized = localized;
     }
 }
